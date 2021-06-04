@@ -4,17 +4,17 @@
     name:
       - apt-transport-https
       - gnupg2
-    state: present
+    state: absent
 
 - name: Add Plex apt key.
   apt_key:
     url: https://downloads.plex.tv/plex-keys/PlexSign.key
-    state: present
+    state: absent
 
 - name: Add Plex apt repository.
   apt_repository:
     repo: deb https://downloads.plex.tv/repo/deb public main
-    state: present
+    state: absent
     update_cache: true
 
 - name: Install Plex.
@@ -27,12 +27,3 @@
     name: plexmediaserver
     state: "{{ plex_service_state }}"
     enabled: "{{ plex_service_enabled }}"
-
-- name: Copy Plex preferences file.
-  template:
-    src: "{{ plex_config_template }}"
-    dest: "{{ plex_config_file_path }}"
-    owner: plex
-    group: plex
-    mode: 0644
-  notify: restart plexmediaserver
