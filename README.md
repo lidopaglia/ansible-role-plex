@@ -1,5 +1,7 @@
 # Ansible Role: Plex
 
+[![CI](https://github.com/lidopaglia/ansible-role-plex/actions/workflows/ci.yml/badge.svg)](https://github.com/lidopaglia/ansible-role-plex/actions/workflows/ci.yml)
+
 An Ansible Role to install [Plex Media Server][0] on Debian / Ubuntu.
 
 ## Requirements
