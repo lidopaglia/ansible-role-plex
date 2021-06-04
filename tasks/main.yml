@@ -1,0 +1,37 @@
+- name: Ensure dependencies are installed.
+  apt:
+    name:
+      - apt-transport-https
+      - gnupg2
+    state: present
+
+- name: Add Plex apt key.
+  apt_key:
+    url: https://downloads.plex.tv/plex-keys/PlexSign.key
+    state: present
+
+- name: Add Plex apt repository.
+  apt_repository:
+    repo: deb https://downloads.plex.tv/repo/deb public main
+    state: present
+    update_cache: true
+
+- name: Install Plex.
+  package:
+    name: "{{ plex_package }}"
+    state: "{{ plex_package_state }}"
+
+- name: Ensure Plex is started and enabled at boot.
+  service:
+    name: plexmediaserver
+    state: "{{ plex_service_state }}"
+    enabled: "{{ plex_service_enabled }}"
+
+- name: Copy Plex preferences file.
+  template:
+    src: "{{ plex_config_template }}"
+    dest: "{{ plex_config_file_path }}"
+    owner: plex
+    group: plex
+    mode: 0644
+  notify: restart plexmediaserver

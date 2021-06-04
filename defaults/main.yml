@@ -1,0 +1,20 @@
+---
+
+plex_package: plexmediaserver
+plex_package_state: present
+
+plex_service_state: started
+plex_service_enabled: true
+
+plex_config_template: plex_preferences.xml.j2
+plex_config_file_path: /var/lib/plexmediaserver/Library/Application Support/Plex Media Server/Preferences.xml
+
+plex_server_accepted_eula: "1"
+plex_server_friendly_name: "XYZ"
+plex_server_send_crash_reports: "0"
+plex_server_publish_server_on_plex_online_key: "1"
+plex_server_host: "{{ ansible_default_ipv4.address }}"
+plex_server_port: "32400"
+plex_server_manual_port_mapping_mode: "1"
+plex_server_manual_port_mapping_port: "32400"
+
