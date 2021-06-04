@@ -17,4 +17,3 @@ plex_server_host: "{{ ansible_default_ipv4.address }}"
 plex_server_port: "32400"
 plex_server_manual_port_mapping_mode: "1"
 plex_server_manual_port_mapping_port: "32400"
-
