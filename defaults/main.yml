@@ -1,7 +1,9 @@
 ---
 
-plex_package: plexmediaserver
-plex_package_state: present
+plex_package: 'plexmediaserver'
+plex_package_state: 'present'
+plex_repo_hostname: 'downloads.plex.tv'
+plex_repo_apt_key_file: "/etc/apt/trusted.gpg.d/{{ plex_repo_hostname }}.gpg"
 
 plex_service_state: started
 plex_service_enabled: true
