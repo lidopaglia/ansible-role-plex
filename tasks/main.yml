@@ -12,18 +12,18 @@
     owner: 'root'
     group: 'root'
     mode: '755'
-- name: Add Plex apt key.
+- name: "Add Plex APT signing key"
   ansible.builtin.apt_key:
-    url: https://{{ plex_repo_hostname }}/plex-keys/PlexSign.key
+    url: "https://{{ plex_repo_hostname }}/plex-keys/PlexSign.key"
     keyring: "{{ plex_repo_apt_key_file }}"
     state: present
-- name: Add Plex apt repository.
+- name: "Add Plex APT repository"
   ansible.builtin.apt_repository:
     repo: "deb [signed-by={{ plex_repo_apt_key_file }}] https://{{ plex_repo_hostname }}/repo/deb public main"
     state: present
     update_cache: true
-- name: Install Plex.
-  ansilbe.builtin.package:
+- name: "Install Plex via apt"
+  ansible.builtin.package:
     name: "{{ plex_package }}"
     state: "{{ plex_package_state }}"
 - name: Ensure Plex is started and enabled at boot.
