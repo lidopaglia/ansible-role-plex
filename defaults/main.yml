@@ -1,13 +1,15 @@
 ---
 
-plex_package: plexmediaserver
-plex_package_state: present
+plex_package: 'plexmediaserver'
+plex_package_state: 'present'
+plex_repo_hostname: 'downloads.plex.tv'
+plex_repo_apt_key_file: "/etc/apt/keyrings/{{ plex_repo_hostname }}.gpg"
 
 plex_service_state: started
 plex_service_enabled: true
 
 plex_config_template: plex_preferences.xml.j2
-plex_config_file_path: /var/lib/plexmediaserver/Library/Application Support/Plex Media Server/Preferences.xml
+plex_config_file_path: "/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/Preferences.xml"
 
 plex_server_accepted_eula: "1"
 plex_server_friendly_name: "XYZ"

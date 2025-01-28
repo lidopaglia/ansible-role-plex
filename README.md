@@ -28,7 +28,7 @@ The template to use for the Plex `Preferences.xml` file, and the path to which t
 
 ```
 plex_config_template: plex_preferences.xml.j2
-plex_config_file_path: /var/lib/plexmediaserver/Library/Application Support/Plex\ Media\ Server/Preferences.xml
+plex_config_file_path: "/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/Preferences.xml"
 ```
 
 ### Server IP address and Port

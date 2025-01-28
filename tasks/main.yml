@@ -1,29 +1,33 @@
 ---
 - name: Ensure dependencies are installed.
-  apt:
+  ansible.builtin.apt:
     name:
       - apt-transport-https
       - gnupg2
     state: present
-
-- name: Add Plex apt key.
-  apt_key:
-    url: https://downloads.plex.tv/plex-keys/PlexSign.key
+- name: "Creating APT keyring directory"
+  ansible.builtin.file:
+    path: '/etc/apt/keyrings'
+    state: 'directory'
+    owner: 'root'
+    group: 'root'
+    mode: '755'
+- name: "Add Plex APT signing key"
+  ansible.builtin.apt_key:
+    url: "https://{{ plex_repo_hostname }}/plex-keys/PlexSign.key"
+    keyring: "{{ plex_repo_apt_key_file }}"
     state: present
-
-- name: Add Plex apt repository.
-  apt_repository:
-    repo: deb https://downloads.plex.tv/repo/deb public main
+- name: "Add Plex APT repository"
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by={{ plex_repo_apt_key_file }}] https://{{ plex_repo_hostname }}/repo/deb public main"
     state: present
     update_cache: true
-
-- name: Install Plex.
-  package:
+- name: "Install Plex via apt"
+  ansible.builtin.package:
     name: "{{ plex_package }}"
     state: "{{ plex_package_state }}"
-
 - name: Ensure Plex is started and enabled at boot.
-  service:
+  ansible.builtin.service:
     name: plexmediaserver
     state: "{{ plex_service_state }}"
     enabled: "{{ plex_service_enabled }}"
